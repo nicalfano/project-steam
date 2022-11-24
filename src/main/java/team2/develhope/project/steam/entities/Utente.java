@@ -240,13 +240,53 @@ public class Utente {
         }
     }
 
-    public void acquista(Acquisto acquisto) throws SQLException {
+    public void acquista(String titolo) throws SQLException {
+
         ConnessioneDatabase connessione = new ConnessioneDatabase();
         Connection connection = DriverManager.getConnection(connessione.getUrl(), connessione.getUser(), connessione.getPassword());
         Statement statement = connection.createStatement();
 
-        // query per aggiungere alla tabella acquisto --- eliminare Libreria utente
+        ResultSet result2 = statement.executeQuery("SELECT * FROM Videogioco WHERE Videogioco.Titolo = '" + titolo + "'");
+
+        double prezzo = 0;
+        while (result2.next()) {
+            prezzo = result2.getDouble("Prezzo");
+        }
+
+        if (this.saldo >= prezzo) {
+            PreparedStatement statement1 = connection.prepareStatement("INSERT INTO Acquisto ( id_Utente, id_Gioco, in_libreria ) VALUES (" + this.getIdUtente() + ",(SELECT IdVideoGioco FROM Videogioco WHERE Videogioco.Titolo = '" + titolo + "'),1);");
+            statement1.executeUpdate();
+
+            this.saldo -= prezzo;
+        } else {
+            System.out.println("Saldo insufficiente ! ");
+        }
+
+        double saldo_aggiornato = this.getSaldo();
+
+        PreparedStatement statement2 = connection.prepareStatement("UPDATE Utente SET Saldo = " + saldo_aggiornato + " WHERE Utente.id_Utente = " + this.idUtente );
+        statement2.executeUpdate();
     }
+
+    public void eliminaGiocoDallaLibreria( String titolo ) throws Exception{
+
+        ConnessioneDatabase connessione = new ConnessioneDatabase();
+        Connection connection = DriverManager.getConnection(connessione.getUrl(), connessione.getUser(), connessione.getPassword());
+        Statement statement = connection.createStatement();
+
+        ResultSet result2 = statement.executeQuery("SELECT * FROM Videogioco WHERE Videogioco.Titolo = '" + titolo + "'");
+        int id_videogioco = 0;
+        while (result2.next()) {
+            id_videogioco = result2.getInt("IdVideoGioco");
+            System.out.println(id_videogioco);
+        }
+
+        PreparedStatement statement2 = connection.prepareStatement("UPDATE Acquisto SET in_libreria = 0 WHERE Acquisto.id_Utente = " + this.getIdUtente() + " AND Acquisto.id_Gioco = " + id_videogioco );
+        statement2.executeUpdate();
+
+    }
+
+
 
     public int getIdUtente() {
         return idUtente;
