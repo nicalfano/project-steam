@@ -16,7 +16,7 @@ public class Recensione {
 @GeneratedValue(strategy = GenerationType.AUTO)
     private long id_Recensione;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false, name = "id_Acquisto")
     private Acquisto acquisto;
     @Column(nullable = false)
     private int voto;

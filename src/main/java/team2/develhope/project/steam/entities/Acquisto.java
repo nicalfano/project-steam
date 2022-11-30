@@ -17,7 +17,7 @@ public class Acquisto {
     private long id_Acuqisto;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = false, name = "id_Utente")
     private Utente utente;
 
     @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
