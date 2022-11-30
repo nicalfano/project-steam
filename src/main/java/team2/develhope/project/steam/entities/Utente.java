@@ -1,9 +1,18 @@
 package team2.develhope.project.steam.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table
 public class Utente {
 
     private String nome;
@@ -12,35 +21,15 @@ public class Utente {
     private String email;
     private String username;
     private String password;
-    private int idUtente;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long idUtente;
     private double saldo = 0;
     private boolean loginStatus = false;
 
 
-    public Utente() {
-    }
 
-    public Utente(String nome, String cognome, int età, String email, String username, String password, double saldo, boolean loginStatus, int idUtente) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.età = età;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.saldo = saldo;
-        this.loginStatus = loginStatus;
-        this.idUtente = idUtente;
-    }
-    public Utente(String nome, String cognome, int età, String email, String username, String password, double saldo, boolean loginStatus) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.età = età;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.saldo = saldo;
-        this.loginStatus = loginStatus;
-    }
+
 
 
 
@@ -113,7 +102,7 @@ public class Utente {
         }
 
 
-        utente = new Utente(nome, cognome, età, email, username, password, saldo, false);
+        utente = new Utente();
 
         ConnessioneDatabase connessione = new ConnessioneDatabase();
         Connection connection = DriverManager.getConnection(connessione.getUrl(), connessione.getUser(), connessione.getPassword());
@@ -288,35 +277,5 @@ public class Utente {
 
 
 
-    public int getIdUtente() {
-        return idUtente;
-    }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public int getEtà() {
-        return età;
-    }
-
-    public String getCognome() {
-        return cognome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getUsername() {
-        return username;
-    }
 }

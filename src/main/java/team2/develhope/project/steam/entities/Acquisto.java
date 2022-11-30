@@ -1,36 +1,30 @@
 package team2.develhope.project.steam.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.time.LocalDate;
-
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table
 public class Acquisto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long idAcuqisto;
 
-    private int idAcquisto;
-    private int idUtente;
+    @Column(nullable = false)
+    private long idUtente;
+
+    @Column(nullable = false)
     private int idGioco;
+    @Column(nullable = false)
     private LocalDate data_acquisto;  //Stringformat per trasformarla poi in stringa qualora si voglia stamparla
 
-    public Acquisto(int idAcquisto,int idUtente, int idGioco, LocalDate data_acquisto){
-        this.idAcquisto = idAcquisto;
-        this.idUtente = idUtente;
-        this.idGioco = idGioco;
-        this.data_acquisto = data_acquisto;
-    }
 
-    public int getIdGioco() {
-        return idGioco;
-    }
-
-    public int getIdAcquisto() {
-        return idAcquisto;
-    }
-
-    public int getIdUtente() {
-        return idUtente;
-    }
-
-    public LocalDate getData_acquisto() {
-        return data_acquisto;
-    }
 
 
 }

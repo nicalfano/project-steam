@@ -1,18 +1,28 @@
 package team2.develhope.project.steam.entities;
 
-public class Recensione {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    private int idVideogioco;
-    private int idUtente;
-        private int voto;
+import javax.persistence.*;
+
+@Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table
+public class Recensione {
+@Id
+@GeneratedValue(strategy = GenerationType.AUTO)
+    private long idVideogioco;
+    @Column(nullable = false)
+    private long idUtente;
+    @Column(nullable = false)
+    private int voto;
     private String commento;
 
-    public Recensione(int idVideogioco, int idUtente, int voto, String commento){
-        this.idVideogioco = idVideogioco;
-        this.idUtente = idUtente;
-        this.voto = voto;
-        this.commento = commento;
-    }
+
+
 
     @Override
     public String toString() {
