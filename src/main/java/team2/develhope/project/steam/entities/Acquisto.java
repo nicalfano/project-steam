@@ -14,16 +14,19 @@ import java.time.LocalDate;
 public class Acquisto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idAcuqisto;
+    private long id_Acuqisto;
 
-    @Column(nullable = false)
-    private long idUtente;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false)
+    private Utente utente;
 
-    @Column(nullable = false)
-    private int idGioco;
-    @Column(nullable = false)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false,name = "id_Gioco")
+    private Videogioco gioco;
+
     private LocalDate data_acquisto;  //Stringformat per trasformarla poi in stringa qualora si voglia stamparla
 
+    private int in_libreria;
 
 
 

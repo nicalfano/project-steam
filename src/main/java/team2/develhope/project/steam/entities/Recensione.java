@@ -14,21 +14,25 @@ import javax.persistence.*;
 public class Recensione {
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
-    private long idVideogioco;
-    @Column(nullable = false)
-    private long idUtente;
+    private long id_Recensione;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(nullable = false)
+    private Acquisto acquisto;
     @Column(nullable = false)
     private int voto;
     private String commento;
 
-
+    public Recensione(Acquisto acquisto, int voto, String commento){
+        this.acquisto = acquisto;
+        this.voto = voto;
+        this.commento = commento;
+    }
 
 
     @Override
     public String toString() {
         return "Recensione{" +
-                "idVideogioco=" + idVideogioco +
-                ", idUtente=" + idUtente +
+                "Acquisto=" + acquisto +
                 ", voto=" + voto +
                 ", commento='" + commento + '\'' +
                 '}';

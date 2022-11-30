@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -36,6 +37,7 @@ public class Videogioco {
     private boolean coop;
     @Column(nullable = false)
     private boolean pVp;
+
 
 
 }

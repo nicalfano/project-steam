@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 @Entity
 @Data
@@ -26,6 +27,7 @@ public class Utente {
     private long idUtente;
     private double saldo = 0;
     private boolean loginStatus = false;
+
 
 
 
@@ -179,7 +181,7 @@ public class Utente {
     }
 //il metodo recensisci videogioco è da sistemare
     public Recensione recensisciVideogioco(Acquisto acquistoVideogioco) {
-        if (acquistoVideogioco.getIdUtente() == this.idUtente) {
+        if (acquistoVideogioco.getUtente().idUtente == this.idUtente) {
             System.out.println("inserisci un voto da 1 a 5");
             Scanner input = new Scanner(System.in);
             int voto = input.nextInt();
@@ -187,7 +189,7 @@ public class Utente {
                 System.out.println("inserisci il commento tutto in una riga");
                 Scanner input1 = new Scanner(System.in);
                 String commento = input1.nextLine();
-                Recensione recensione = new Recensione(acquistoVideogioco.getIdGioco(), this.idUtente, voto, commento);
+                Recensione recensione = new Recensione(acquistoVideogioco,voto, commento);
                 return recensione;
             } else {
                 System.out.println("il voto inserito non è corretto");
@@ -195,7 +197,7 @@ public class Utente {
 
         }
 
-    return new Recensione(1,1,1,"null");
+    return new Recensione();
     }
 
 
