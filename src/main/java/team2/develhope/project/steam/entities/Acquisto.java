@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 @Entity
 @Data
 @AllArgsConstructor
@@ -24,9 +24,9 @@ public class Acquisto {
     @JoinColumn(nullable = false,name = "id_Gioco")
     private Videogioco gioco;
 
-    private LocalDate data_acquisto;  //Stringformat per trasformarla poi in stringa qualora si voglia stamparla
+    private Timestamp data_acquisto;  //Stringformat per trasformarla poi in stringa qualora si voglia stamparla
 
-    private int in_libreria;
+    private boolean in_libreria;
 
 
 
