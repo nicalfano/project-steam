@@ -14,5 +14,7 @@ public interface AcquistoRepository extends JpaRepository<Acquisto,Long> {
     public List<Acquisto> findAllByUtente(Optional<Utente> utente);
 
 
-    List<Acquisto> findAllById(Long idUtente);
+
+
+
 }
