@@ -16,7 +16,7 @@ public class Videogioco {
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
     private long idVideogioco;
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String titolo;
     @Column(nullable = false)
     private double prezzo;
