@@ -29,7 +29,9 @@ public class RecensioneController {
 
         Acquisto acquisto = recensioneService.getAcquisto(idUtente, idVideogioco);
 
-        return new Recensione(acquisto, recensione.getVoto(), recensione.getCommento());
+        Recensione recensione1 = new Recensione(acquisto, recensione.getVoto(), recensione.getCommento());
+
+        return recensioneRepository.save(recensione1);
     }
 
 
