@@ -12,8 +12,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Table
 public class Recensione {
-@Id
-@GeneratedValue(strategy = GenerationType.AUTO)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id_Recensione;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false, name = "id_Acquisto")
@@ -24,6 +25,11 @@ public class Recensione {
 
     public Recensione(Acquisto acquisto, int voto, String commento){
         this.acquisto = acquisto;
+        this.voto = voto;
+        this.commento = commento;
+    }
+
+    public Recensione(int voto, String commento){
         this.voto = voto;
         this.commento = commento;
     }

@@ -30,9 +30,16 @@ public class Utente {
 
 
 
-
-
-
+    public Utente(String nome, String cognome, int età, String email, String username, String pw, double saldo, boolean loginStatus){
+        this.nome = nome;
+        this.cognome = cognome;
+        this.età = età;
+        this.email = email;
+        this.username = username;
+        this.password = pw;
+        this.saldo = saldo;
+        this.loginStatus = loginStatus;
+    }
 
 
     public boolean checkUsername(String username) throws SQLException {

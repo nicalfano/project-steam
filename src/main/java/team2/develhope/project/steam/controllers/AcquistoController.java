@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @RestController
 @RequestMapping("/acquisto")
 public class AcquistoController {
+
     @Autowired
     private AcquistoRepository acquistoRepository;
     @Autowired

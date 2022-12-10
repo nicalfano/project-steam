@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 public class Acquisto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id_Acuqisto;
+    private long id_Acquisto;
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false, name = "id_Utente")

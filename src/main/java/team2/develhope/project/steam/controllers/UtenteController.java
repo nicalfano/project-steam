@@ -7,23 +7,32 @@ import team2.develhope.project.steam.entities.Utente;
 import team2.develhope.project.steam.entities.Videogioco;
 import team2.develhope.project.steam.repositories.AcquistoRepository;
 import team2.develhope.project.steam.repositories.UtenteRepository;
+import team2.develhope.project.steam.services.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/utente")
-public class UserController {
+public class UtenteController {
     @Autowired
     private UtenteRepository utenteRepository;
 
     @Autowired
     private AcquistoRepository acquistoRepository;
-    @PostMapping
-    public Utente inserisciUtente (@RequestBody Utente utente){
-        return utenteRepository.save(utente);
 
+    @Autowired
+    private UserService userService;
+
+
+
+    @PostMapping("/registrazione")
+    public Utente registraUtente(@RequestBody Utente utente) throws Exception {
+        userService.checkUsername(utente);
+        System.out.println("The user is been saved!");
+        return utenteRepository.save(utente);
     }
+
 
     @GetMapping("/libreria")
     public List<Videogioco> libreriaPersonale(@RequestParam Long id ){
