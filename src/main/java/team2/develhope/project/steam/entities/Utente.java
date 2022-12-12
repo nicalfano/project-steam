@@ -1,5 +1,6 @@
 package team2.develhope.project.steam.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.Scanner;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Utente {
 
     private String nome;

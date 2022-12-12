@@ -1,5 +1,6 @@
 package team2.develhope.project.steam.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Recensione {
 
     @Id
