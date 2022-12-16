@@ -26,22 +26,6 @@ public class AcquistoController {
     private UtenteRepository utenteRepository;
     @Autowired
     private VideogiocoRepository videogiocoRepository;
-    @PostMapping
-    public HttpStatus acquista(@RequestParam Long idUtente, @RequestParam Long idVideogioco ) throws Exception {
 
-        Utente utente = utenteRepository.getReferenceById(idUtente);
-        Videogioco videogioco = videogiocoRepository.getReferenceById((idVideogioco.longValue()));
-
-        if (utente.getSaldo() >= videogioco.getPrezzo() ) {
-            Acquisto newAcquisto = new Acquisto(utente,videogioco, Timestamp.valueOf(LocalDateTime.now()),true);
-            double saldoAggiornato = utente.getSaldo() - videogioco.getPrezzo();
-            utente.setSaldo(saldoAggiornato);
-            utenteRepository.saveAndFlush(utente);
-            acquistoRepository.saveAndFlush(newAcquisto);
-            HttpStatus status = HttpStatus.OK;
-            return status;
-        } else {
-            throw new Exception("Saldo insufficiente ! ");
-        }
-    }
 }
+

@@ -34,9 +34,6 @@ public class Acquisto {
     @Column
     private boolean in_libreria;
 
-    @OneToOne(mappedBy = "acquisto")
-    private Recensione recensione;
-
 public Acquisto (Utente utente,Videogioco videogioco, Timestamp data_acquisto, boolean in_libreria){
     this.utente = utente;
     this.gioco = videogioco;
