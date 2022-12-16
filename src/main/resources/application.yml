@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/steam
+    url: jdbc:mysql://localhost:3306/newdb
     username: root
-    password: 1234
+    password: Aa0112358)
   jpa:
     database: mysql
     show-sql: true

@@ -14,5 +14,5 @@ import java.util.Optional;
 public interface RecensioneRepository extends JpaRepository<Recensione, Long> {
 
 
-
+    Recensione findByAcquisto(Acquisto c);
 }

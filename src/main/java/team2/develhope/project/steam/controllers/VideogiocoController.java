@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import team2.develhope.project.steam.entities.Videogioco;
 import team2.develhope.project.steam.repositories.VideogiocoRepository;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -22,7 +24,7 @@ public class VideogiocoController {
         return videogiocoRepository.save(videogioco);
     }
 
-    @GetMapping
+    @GetMapping("/esplora")
     public Page<Videogioco> get(@RequestParam(required = false) Optional<Integer> page, @RequestParam(required = false) Optional<Integer> size) {
         if (page.isPresent() && size.isPresent()) {
             Sort sort = Sort.by(new Sort.Order(Sort.Direction.ASC, "titolo"));
@@ -38,7 +40,8 @@ public class VideogiocoController {
     }
     @GetMapping
     @RequestMapping("/trovauno")
-    public Videogioco trovaUnVideogioco(@RequestParam String titolo){
-        return videogiocoRepository.findByTitolo(titolo);
+    public Collection<Videogioco> trovaUnVideogioco(@RequestParam String titolo){
+
+        return videogiocoRepository.findAllVideogiocoLikeTitolo(titolo);
     }
 }
