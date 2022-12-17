@@ -19,10 +19,7 @@ public class VideogiocoController {
     @Autowired
     private VideogiocoRepository videogiocoRepository;
 
-    @PostMapping
-    public Videogioco inserisciVideogioco(@RequestBody Videogioco videogioco) {
-        return videogiocoRepository.save(videogioco);
-    }
+
 
     @GetMapping("/esplora")
     public Page<Videogioco> get(@RequestParam(required = false) Optional<Integer> page, @RequestParam(required = false) Optional<Integer> size) {
@@ -43,5 +40,9 @@ public class VideogiocoController {
     public Collection<Videogioco> trovaUnVideogioco(@RequestParam String titolo){
 
         return videogiocoRepository.findAllVideogiocoLikeTitolo(titolo);
+    }
+    @PostMapping
+    public Videogioco inserisciVideogioco(@RequestBody Videogioco videogioco) {
+        return videogiocoRepository.save(videogioco);
     }
 }
