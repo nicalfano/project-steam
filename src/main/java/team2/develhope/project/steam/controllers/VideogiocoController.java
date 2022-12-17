@@ -35,13 +35,12 @@ public class VideogiocoController {
             return videogiochi;
         }
     }
-    @GetMapping
-    @RequestMapping("/trovauno")
-    public Collection<Videogioco> trovaUnVideogioco(@RequestParam String titolo){
+    @GetMapping("trovauno")
+      public Collection<Videogioco> trovaUnVideogioco(@RequestParam String titolo){
 
         return videogiocoRepository.findAllVideogiocoLikeTitolo(titolo);
     }
-    @PostMapping
+    @PostMapping("/inserisci")
     public Videogioco inserisciVideogioco(@RequestBody Videogioco videogioco) {
         return videogiocoRepository.save(videogioco);
     }

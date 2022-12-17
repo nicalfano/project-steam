@@ -64,10 +64,9 @@ public class UtenteService {
     }
 
     public HttpStatus acquista(Long idUtente, Long idVideogioco) throws Exception {
-
         Utente utente = utenteRepository.getReferenceById(idUtente);
         Videogioco videogioco = videogiocoRepository.getReferenceById((idVideogioco.longValue()));
-
+        List<Acquisto> acquistos = acquistoRepository.findAll();
         try {
             if (videogioco == null) {
                 throw new Exception();
@@ -76,24 +75,20 @@ public class UtenteService {
             HttpStatus status = HttpStatus.valueOf("GIOCO NON DISPONIBILE");
         }
 
-        try {
-            if (utente == null) {
-                throw new Exception();
-            } else {
+       {
                 if (utente.getSaldo() >= videogioco.getPrezzo()) {
                     Acquisto newAcquisto = new Acquisto(utente, videogioco, Timestamp.valueOf(LocalDateTime.now()), true);
                     double saldoAggiornato = utente.getSaldo() - videogioco.getPrezzo();
                     utente.setSaldo(saldoAggiornato);
                     utenteRepository.saveAndFlush(utente);
+                    for (Acquisto a:acquistos) {
+                        if(a.getGioco().getIdVideogioco() == idVideogioco && a.getUtente().getIdUtente() == idUtente){throw new Exception("Hai già acquistato il titolo");
+                    }}
                     acquistoRepository.saveAndFlush(newAcquisto);
                     HttpStatus status = HttpStatus.OK;
                     return status;
-                } else {
-                    throw new Exception(" SALDO INSUFFICIENTE ! ");
                 }
-            }
-        } catch (Exception e) {
-            HttpStatus status = HttpStatus.valueOf("NON PUOI FARE ACQUISTI SE NON SEI REGISTRATO ! ");
+
         }
         return HttpStatus.OK;
     }
@@ -212,14 +207,8 @@ public class UtenteService {
         videogiochiGeneriPiuGiocati.addAll(videogiocoRepository.findAllByGenere(g));
         }
 
-        for (String g:treGeneri) {
-            videogiochiGeneriPiuGiocati.addAll(videogiocoRepository.findAllByGenere(g));
-        }
-        System.out.println(videogiochiGeneriPiuGiocati);
-
         videogiochiGeneriPiuGiocati.removeAll(libreriaPersonale);
 
-        System.out.println(videogiochiGeneriPiuGiocati);
         //mappa dei giochi inerenti ai tre generei più acquistati dall'utente con la media delle recensioni
         Map<Long,Double> mappaGiochiMedia = new HashMap<>();
         for (Videogioco v : videogiochiGeneriPiuGiocati) {
@@ -240,7 +229,7 @@ public class UtenteService {
         //lista di Entry(gioco più media recensioni) ordinati in base alla media
         List<Map.Entry<Long, Double>> giochiOrdinatiMedia = new ArrayList<>(mappaGiochiMedia.entrySet());
         giochiOrdinatiMedia.sort(Map.Entry.comparingByValue());
-        System.out.println(giochiOrdinatiMedia);
+
         List<Videogioco> giochiConsigliatiInBaseAlGenere = new ArrayList<>();
         if(!videogiochiGeneriPiuGiocati.isEmpty()) {
             Optional<Videogioco> giocoConVotoAlto = videogiocoRepository.findById(giochiOrdinatiMedia.get(giochiOrdinatiMedia.size() - 1).getKey());
