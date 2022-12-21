@@ -200,8 +200,9 @@ public class UtenteService {
                 maxEntry3 = entry;
             }
         }
-        treGeneri.add(String.valueOf(maxEntry3.getKey()));
-
+        if(maxEntry3 != null) {
+            treGeneri.add(String.valueOf(maxEntry3.getKey()));
+        }
         List<Videogioco> videogiochiGeneriPiuGiocati = new ArrayList<>();
         for (String g: treGeneri) {
         videogiochiGeneriPiuGiocati.addAll(videogiocoRepository.findAllByGenere(g));
@@ -254,10 +255,11 @@ public class UtenteService {
         recensioniUtente.sort(Comparator.comparing(Recensione::getVoto));
         //lista dei 3 migliori titoli in base alle recensioni dell'utente
         List<Videogioco> bestInLibreria = new ArrayList<>();
-        bestInLibreria.add(recensioniUtente.get(recensioniUtente.size()-1).getAcquisto().getGioco());
-        bestInLibreria.add(recensioniUtente.get(recensioniUtente.size()-2).getAcquisto().getGioco());
-        bestInLibreria.add(recensioniUtente.get(recensioniUtente.size()-3).getAcquisto().getGioco());
-
+        if(bestInLibreria.size()>= 3) {
+            bestInLibreria.add(recensioniUtente.get(recensioniUtente.size() - 1).getAcquisto().getGioco());
+            bestInLibreria.add(recensioniUtente.get(recensioniUtente.size() - 2).getAcquisto().getGioco());
+            bestInLibreria.add(recensioniUtente.get(recensioniUtente.size() - 3).getAcquisto().getGioco());
+        }
         List<String> generiInBest = new ArrayList<>();
         for (Videogioco v: bestInLibreria) {
             generiInBest.add(v.getGenere());
@@ -275,26 +277,31 @@ public class UtenteService {
                 maxEntry = entry;
             }
         }
-        List<String> treGeneri = new ArrayList<>();
-        treGeneri.add(String.valueOf(maxEntry.getKey()));
-        frequenzeGeneri.remove(maxEntry.getKey());
 
+            List<String> treGeneri = new ArrayList<>();
+        if(maxEntry != null) {
+            treGeneri.add(String.valueOf(maxEntry.getKey()));
+            frequenzeGeneri.remove(maxEntry.getKey());
+        }
         Map.Entry<String, Integer> maxEntry2 = null;
         for (Map.Entry<String, Integer> entry : frequenzeGeneri.entrySet()) {
             if (maxEntry2 == null || entry.getValue() > maxEntry2.getValue()) {
                 maxEntry2 = entry;
             }
         }
-        treGeneri.add(String.valueOf(maxEntry2.getKey()));
-        frequenzeGeneri.remove(maxEntry2.getKey());
+        if(maxEntry2!= null) {
+            treGeneri.add(String.valueOf(maxEntry2.getKey()));
+            frequenzeGeneri.remove(maxEntry2.getKey());
+        }
         Map.Entry<String, Integer> maxEntry3 = null;
         for (Map.Entry<String, Integer> entry : frequenzeGeneri.entrySet()) {
             if (maxEntry3 == null || entry.getValue() > maxEntry3.getValue()) {
                 maxEntry3 = entry;
             }
         }
-        treGeneri.add(String.valueOf(maxEntry3.getKey()));
-
+        if(maxEntry3 != null) {
+            treGeneri.add(String.valueOf(maxEntry3.getKey()));
+        }
         List<Videogioco> videogiochiGeneriPiuGiocati = new ArrayList<>();
         for (String g: treGeneri) {
             videogiochiGeneriPiuGiocati.addAll(videogiocoRepository.findAllByGenere(g));

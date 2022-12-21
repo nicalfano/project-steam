@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import team2.develhope.project.steam.entities.Acquisto;
 import team2.develhope.project.steam.entities.Recensione;
+import team2.develhope.project.steam.entities.RecensioneDTO;
 import team2.develhope.project.steam.repositories.AcquistoRepository;
 import team2.develhope.project.steam.repositories.RecensioneRepository;
 import team2.develhope.project.steam.services.RecensioneService;
@@ -25,7 +26,7 @@ public class RecensioneController {
     private AcquistoRepository acquistoRepository;
 
     @PostMapping("/pubblica")
-    public Recensione recensisciGioco(@RequestParam Long idUtente, @RequestParam Long idVideogioco, @RequestBody Recensione recensione) throws Exception {
+    public Recensione recensisciGioco(@RequestParam Long idUtente, @RequestParam Long idVideogioco, @RequestBody RecensioneDTO recensione) throws Exception {
 
         Acquisto acquisto = recensioneService.getAcquisto(idUtente, idVideogioco);
 
