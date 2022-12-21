@@ -1,8 +1,10 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/newdb
-    username: root
-    password: Aa0112358)
+    url: jdbc:mysql://sql7.freesqldatabase.com:3306/sql7585885
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: sql7585885
+    password: 5GeJMvp1DZ
+
   jpa:
     database: mysql
     show-sql: true
