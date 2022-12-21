@@ -36,7 +36,7 @@ public class VideogiocoController {
         }
     }
     @GetMapping("trovauno")
-      public Collection<Videogioco> trovaUnVideogioco(@RequestParam String titolo){
+      public List<Videogioco> trovaUnVideogioco(@RequestParam String titolo){
 
         return videogiocoRepository.findAllVideogiocoLikeTitolo(titolo);
     }

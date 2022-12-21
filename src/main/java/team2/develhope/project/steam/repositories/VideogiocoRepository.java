@@ -12,9 +12,9 @@ import java.util.List;
 public interface VideogiocoRepository extends JpaRepository<Videogioco,Long> {
     public Videogioco findByTitolo (String titolo);
 
-    @Query(value = "SELECT * FROM Videogioco v WHERE v.titolo LIKE %?1%", nativeQuery = true)
-    Collection<Videogioco> findAllVideogiocoLikeTitolo(String titolo);
+    @Query(value = "SELECT * FROM videogioco v WHERE v.titolo LIKE %?1%", nativeQuery = true)
+    List<Videogioco> findAllVideogiocoLikeTitolo(String titolo);
 
-    @Query(value = "SELECT * FROM Videogioco v WHERE v.genere OR v.genere2 = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM videogioco v WHERE v.genere OR v.genere2 = ?1", nativeQuery = true)
     Collection<Videogioco> findAllByGenere(String genere);
 }
