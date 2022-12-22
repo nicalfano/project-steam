@@ -16,5 +16,5 @@ public interface VideogiocoRepository extends JpaRepository<Videogioco,Long> {
     List<Videogioco> findAllVideogiocoLikeTitolo(String titolo);
 
     @Query(value = "SELECT * FROM videogioco v WHERE v.genere OR v.genere2 = ?1", nativeQuery = true)
-    Collection<Videogioco> findAllByGenere(String genere);
+    List<Videogioco> findAllByGenere(String genere);
 }

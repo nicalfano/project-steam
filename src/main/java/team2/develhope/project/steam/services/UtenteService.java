@@ -255,7 +255,7 @@ public class UtenteService {
         recensioniUtente.sort(Comparator.comparing(Recensione::getVoto));
         //lista dei 3 migliori titoli in base alle recensioni dell'utente
         List<Videogioco> bestInLibreria = new ArrayList<>();
-        if(bestInLibreria.size()>= 3) {
+        if(recensioniUtente.size()>= 3) {
             bestInLibreria.add(recensioniUtente.get(recensioniUtente.size() - 1).getAcquisto().getGioco());
             bestInLibreria.add(recensioniUtente.get(recensioniUtente.size() - 2).getAcquisto().getGioco());
             bestInLibreria.add(recensioniUtente.get(recensioniUtente.size() - 3).getAcquisto().getGioco());
